@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in!<br>
+                    @foreach(\App\User::all() as $user)
+                        {{ $user->name }}
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ use App\User;
 use App\Role;
 use App\Permission;
 use Carbon\Carbon;
+use App\Provider;
 
 class TenantController extends Controller
 {
@@ -42,10 +43,12 @@ class TenantController extends Controller
 
     public function getTenant()
     {
-        $website   = \Hyn\Tenancy\Facades\TenancyFacade::website();
-        //$website   = Website::where('uuid','milan@exaple.com')->first();
-        $website   = app(\Hyn\Tenancy\Environment::class)->tenant();
+        //$website   = \Hyn\Tenancy\Facades\TenancyFacade::website();
+        $website   = Website::where('uuid','provider1')->first();
+        // $website   = app(\Hyn\Tenancy\Environment::class)->tenant();
+        // $website   = app(\Hyn\Tenancy\Environment::class)->tenant();
         dd($website);
+        
     }
 
     public function createUser()
@@ -65,15 +68,19 @@ class TenantController extends Controller
 
 public function fullTenantCreate()
 {
-    $name = 'Milan';
-    $email = 'milan@example.com';
-    $password = bcrypt('milanpass');
+    $name = 'Dusan';
+    $email = 'dusan@example.com';
+    $password = bcrypt('dusanpass');
     $user = User::create([
         'name' => $name,
         'email' => $email,
         'password' => $password,
     ]);
-    $uuid = $user->email;
+    $provider = Provider::create([
+        'name' =>'provider'.$user->id,
+        'user_id' => $user->id,
+    ]);
+    $uuid = $provider->name;
     $this->createWebsite($uuid);
     return "Success!";
 }

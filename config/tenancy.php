@@ -129,7 +129,7 @@ return [
          *
          * @see src/Jobs/HostnameIdentification.php
          */
-        'auto-identification' => env('TENANCY_AUTO_HOSTNAME_IDENTIFICATION', true),
+        'auto-identification' => env('TENANCY_AUTO_HOSTNAME_IDENTIFICATION', false),
 
         /**
          * In case you want to have the tenancy environment set up early,
